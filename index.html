@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fruit Chart</title>
-    <script type="text/javascript" src="d3.v7.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <style type="text/css">
-        body{
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
             background-color: white;
-            color:black;
+            color: black;
             font-family: "Poppins", sans-serif;
-            font-weight: 600;
-            font-style: normal;
+            text-align: center;
+        }
+        svg {
+            display: block;
+            margin: auto;
         }
     </style>
 </head>
@@ -24,37 +27,75 @@
         <h4>Made with &heartsuit; by Wystan Way</h4>
         <p id="ghub"></p>
     </footer>
-    <script type="text/javascript">
-        // Width and height
-        var margin = {top: 20, right: 90, bottom: 30, left: 90};
-        var w = 1000 + margin.left + margin.right;
-        var h = 600 + margin.top + margin.bottom;
+    
+    <script>
+        // Set dimensions
+        const margin = {top: 20, right: 30, bottom: 50, left: 60};
+        const width = 800 - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
 
-        // Create SVG element
-        var svg = d3.select("body")
-            .append("svg")
-            .attr("width", w)
-            .attr("height", h);
-        
-        d3.csv("https://raw.githubusercontent.com/Kitty-Koding/Map/refs/heads/main/data.csv").then(function(data) {
-            // Convert CSV data to an array of arrays
-            var Data = data.map(function(d) {
-                return [
-                    d.Fruit,  // Name of the fruit
-                    d.Type,   // Type (Fresh/Dried)
-                    +d["Price"],  // Price (converted to number)
-                    +d["Per Capita Loss"],  // Per Capita Loss (converted to number)
-                    +d.Popularity,  // Popularity (converted to number)
-                    d.Color  // Color code
-                ];
+        // Create SVG container
+        const svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // CSV File (Ensure this URL is correct for GitHub Pages)
+        const csvFile = "https://kitty-koding.github.io/Fruit/Fruits.csv";
+
+        d3.csv(csvFile).then(function(data) {
+            console.log("Data loaded:", data);
+
+            if (data.length === 0) {
+                d3.select("body").append("p").text("Error: No data found!");
+                return;
+            }
+
+            // Convert numerical values
+            data.forEach(d => {
+                d.Price = +d.Price;
+                d.Popularity = +d.Popularity;
             });
 
-            // Check if Data is loaded
-            d3.select("body").append("p").text("Loaded");
+            // Scales
+            const xScale = d3.scaleBand()
+                .domain(data.map(d => d.Fruit))
+                .range([0, width])
+                .padding(0.2);
 
-            // Continue with your D3 chart logic here, now that Data is available
-            console.log(Data); // For debugging, to see the loaded data
+            const yScale = d3.scaleLinear()
+                .domain([0, d3.max(data, d => d.Price)])
+                .nice()
+                .range([height, 0]);
+
+            // Axes
+            svg.append("g")
+                .attr("transform", `translate(0,${height})`)
+                .call(d3.axisBottom(xScale))
+                .selectAll("text")
+                .attr("transform", "rotate(-45)")
+                .style("text-anchor", "end");
+
+            svg.append("g").call(d3.axisLeft(yScale));
+
+            // Bars
+            svg.selectAll(".bar")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", d => xScale(d.Fruit))
+                .attr("y", d => yScale(d.Price))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => height - yScale(d.Price))
+                .attr("fill", d => d.Color || "steelblue"); // Default color if missing
+
+        }).catch(error => {
+            console.error("Error loading the CSV file:", error);
+            d3.select("body").append("p").text("Failed to load CSV file!");
         });
+
     </script>
 </body>
 </html>
