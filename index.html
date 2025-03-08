@@ -121,8 +121,8 @@
                 .enter()
                 .append("text")
                 .attr("class", "label")
-                .attr("x", d => xScale(d.Price) + 10)
-                .attr("y", d => yScale(d.Popularity))
+                .attr("x", d => xScale(d.Price))
+                .attr("y", d => yScale(d.Popularity)-10)
                 .style("font-size", "12px")
                 .style("fill", "black")
                 .text(d => d.Fruit);
