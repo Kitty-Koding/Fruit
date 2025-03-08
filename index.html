@@ -25,13 +25,10 @@
         <p id="ghub"></p>
     </footer>
     <script type="text/javascript">
-
-        var Data;
-
         // Width and height
         var margin = {top: 20, right: 90, bottom: 30, left: 90};
-        var w = 1000+margin.left+margin.right;
-        var h = 600+margin.top+margin.bottom;
+        var w = 1000 + margin.left + margin.right;
+        var h = 600 + margin.top + margin.bottom;
 
         // Create SVG element
         var svg = d3.select("body")
@@ -39,24 +36,25 @@
             .attr("width", w)
             .attr("height", h);
         
-            d3.csv("Fruits.csv").then(function(data) {
-                // Convert CSV data to an array of arrays
-                Data = data.map(function(d) {
-                    return [
-                        d.Fruit,  // Name of the fruit
-                        d.Type,   // Type (Fresh/Dried)
-                        +d["Price"],  // Price (converted to number)
-                        +d["Per Capita Loss"],  // Per Capita Loss (converted to number)
-                        +d.Popularity,  // Popularity (converted to number)
-                        d.Color  // Color code
-                    ];
-                });
+        d3.csv("Fruits.csv").then(function(data) {
+            // Convert CSV data to an array of arrays
+            var Data = data.map(function(d) {
+                return [
+                    d.Fruit,  // Name of the fruit
+                    d.Type,   // Type (Fresh/Dried)
+                    +d["Price"],  // Price (converted to number)
+                    +d["Per Capita Loss"],  // Per Capita Loss (converted to number)
+                    +d.Popularity,  // Popularity (converted to number)
+                    d.Color  // Color code
+                ];
             });
-            
-            if(Data !== undefined){
-                d3.select("body").append("p").text("Loaded");
-            }
 
+            // Check if Data is loaded
+            d3.select("body").append("p").text("Loaded");
+
+            // Continue with your D3 chart logic here, now that Data is available
+            console.log(Data); // For debugging, to see the loaded data
+        });
     </script>
 </body>
 </html>
