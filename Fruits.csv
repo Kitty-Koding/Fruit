@@ -1,0 +1,26 @@
+Fruit,Type,Per Capita Loss,Price,Price Unit,Popularity,Color
+Apples,Fresh,15.81360147,1.8541,pound,76,#ff4d40
+Apricots,Fresh,0.098255781,3.6162,pound,63,#ffb340
+Apricots (Dried),Dried,0.527491055,7.6611,pound,57,#d6993c
+Bannanas,Fresh,26.86712417,0.5971,pound,85,#fff236
+Blackberries,Fresh,0.09331872,6.7483,pound,75,#730fba
+Blueberries,Fresh,2.536372604,4.1575,pound,79,#2654ed
+Cantalopes,Fresh,5.164518417,0.7523,pound,70,#ffbb54
+Cherries,Fresh,1.438434863,4.6632,pound,66,#fc2626
+Cranberries,Dried,2.190907542,5.0828,pound,61,#cf1d1d
+Dates,Dried,0.42716965,5.7499,pound,55,#a35e0f
+Figs,Dried,0.412892597,7.3233,pound,54,#f06b32
+Grapefruit,Fresh,1.5,1.4444,pound,63,#ff0044
+Grapes,Fresh,8.495760534,2.0363,pound,84,#7cf241
+Honeydew,Fresh,1.404753597,1.1589,pound,65,#b8ff70
+Kiwi,Fresh,0.80033119,2.6064,pound,69,#74ff5e
+Mangoes,Fresh,3.661841603,1.4698,pound,71,#fff647
+Oranges,Fresh,45.8846914,1.4624,pound,79,#ff9b21
+Peaches,Fresh,2.375555104,2.1785,pound,71,#ff6721
+Pears,Fresh,3.122416088,1.8472,pound,58,#47f561
+Pinnaple,Fresh,7.875401462,0.617,pound,82,#fffc54
+Plum,Fresh,0.499810982,2.5259,pound,70,#9417b0
+Pomegranate,Fresh,0.1073970907,2.4672,pound,63,#ff405c
+Raspberries,Fresh,0.917205529,7.7338,pound,78,#ff3643
+Strawberries,Fresh,7.30267244,2.9682,pound,87,#ff4036
+Watermelon,Fresh,14.39544509,0.382,pound,83,#ff4d4d
