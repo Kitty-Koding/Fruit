@@ -110,7 +110,7 @@
                 .attr("cx", d => xScale(d.Price))
                 .attr("cy", d => yScale(d.Popularity))
                 .attr("r", d => sizeScale(d["Per Capita Loss"]))
-                .attr("fill", d => d.Color || "steelblue") // Default color if missing
+                .attr("fill", d => d.Color || "blue") // Default color if missing
                 .attr("stroke", "black")
                 .append("title")
                 .text(d => `${d.Fruit}\nPrice: $${d.Price}\nPopularity: ${d.Popularity}\nLoss: ${d["Per Capita Loss"]}`);
