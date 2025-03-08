@@ -45,7 +45,7 @@
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
-        // CSV File (Update this to match your GitHub Pages URL)
+        // CSV File (Update this with your GitHub Pages URL)
         const csvFile = "https://kitty-koding.github.io/Fruit/Fruits.csv";
 
         d3.csv(csvFile).then(function(data) {
@@ -63,13 +63,17 @@
                 d["Per Capita Loss"] = +d["Per Capita Loss"];
             });
 
+            // Get min & max values for scales
+            const minPopularity = d3.min(data, d => d.Popularity);
+            const maxPopularity = d3.max(data, d => d.Popularity);
+
             // Scales
             const xScale = d3.scaleLinear()
                 .domain([0, d3.max(data, d => d.Price) + 1])
                 .range([0, width]);
 
             const yScale = d3.scaleLinear()
-                .domain([0, d3.max(data, d => d.Popularity) + 10])
+                .domain([minPopularity, maxPopularity]) // Dynamically scale Y-Axis
                 .range([height, 0]);
 
             const sizeScale = d3.scaleSqrt()
